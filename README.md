@@ -1,4 +1,7 @@
 # Hand Segmentation in Third-Person Point of View
+* The code is modified from [CSAILVision GitHub Repository](https://github.com/CSAILVision/semantic-segmentation-pytorch).
+* [EgoHands](http://vision.soic.indiana.edu/projects/egohands/) dataset is utilised to train this neural network.
+
 ## Pretrained Model
 Download the pretrained model from [Google Drive](https://drive.google.com/drive/u/1/folders/1q--u3g9XgQ0qH1I6JJfCs3EfTMc3t1IT) and place the model in ```ckpt/egohands-resnet50dilated-ppm_deepsup```
 ## Quick Start: Running Inference
