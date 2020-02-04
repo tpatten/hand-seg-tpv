@@ -10,3 +10,12 @@ python3 run_inference.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml 
 ```bash
 python3 run_inference.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml --resolution 720p --visualise
 ```
+## Offline Testing
+1. Generate an annotation file
+```bash
+python3 generate_odgt.py --folder ./test-images --out testing.odgt
+```
+2. To test on a folder of images
+```bash
+python3 test.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml
+```
