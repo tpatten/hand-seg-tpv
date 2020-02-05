@@ -27,3 +27,17 @@ python3 generate_odgt.py --folder [FOLDER] --out testing.odgt
 ```bash
 python3 test.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml
 ```
+## lib.segmentation package
+**lib.segmentation.module_init(*cfg*)** \
+**Parameters:** \
+**cfg** (*class 'yacs.config.CfgNode'*) – configuration file \
+**Returns:** \
+**segmentation_module** (*class 'models.models.SegmentationModule'*) – segmentation module
+
+**lib.segmentation.hand_segmentation(*frame, segmentation_module, save*)**\
+**Parameters:** \
+**frame** (*numpy.ndarray*) – Input frame \
+**segmentation_module** (*class 'models.models.SegmentationModule'*) – segmentation module \
+**save** (*boolean*) – a flag to save the numpy array \
+**Returns:** \
+**pred** (*numpy.ndarray*) – prediction 
