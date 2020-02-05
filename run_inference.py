@@ -18,6 +18,7 @@ from lib.nn import user_scattered_collate, async_copy_to
 from lib.utils import as_numpy
 from PIL import Image
 from config import cfg
+from lib.segmentation import hand_segmentation, module_init
 
 # Standard Video Dimensions Sizes
 STD_DIMENSIONS =  {
@@ -33,57 +34,10 @@ def set_resolution(cap, width, height):
     cap.set(3, width)
     cap.set(4, height)
 
-
-def img_transform(img):
-    normalize = transforms.Normalize(
-        mean=[0.485, 0.456, 0.406],
-        std=[0.229, 0.224, 0.225])
-    img = np.float32(np.array(img)) / 255.0
-    img = img.transpose((2, 0, 1))
-    img = normalize(torch.from_numpy(img))
-    return img
-
-
-def hand_segmentation(frame, segmentation_module):
-    # Convert to torch.Tensor
-    frame_tensor = img_transform(frame)
-    frame_tensor = torch.unsqueeze(frame_tensor, 0).cuda()
-
-    # Get sizes
-    segSize = (as_numpy(frame).shape[0], as_numpy(frame).shape[1])
-
-    # Forward pass
-    pred_tmp = segmentation_module(frame_tensor, segSize=segSize)
-    _, pred = torch.max(pred_tmp, dim=1)
-
-    # Convert to numpy.ndarray
-    pred = as_numpy(pred.squeeze(0).cpu())
-    return pred
-
-
-def module_init():
-    # Network Builders
-    net_encoder = ModelBuilder.build_encoder(arch=cfg.MODEL.arch_encoder, \
-                                             fc_dim=cfg.MODEL.fc_dim, \
-                                             weights=cfg.MODEL.weights_encoder)
-    net_decoder = ModelBuilder.build_decoder(arch=cfg.MODEL.arch_decoder, \
-                                             fc_dim=cfg.MODEL.fc_dim, \
-                                             num_class=cfg.DATASET.num_class, \
-                                             weights=cfg.MODEL.weights_decoder, \
-                                             use_softmax=True)
-    # NLLLoss
-    crit = nn.NLLLoss(ignore_index=-1)
-    # Instantiate segmentation module
-    segmentation_module = SegmentationModule(net_encoder, net_decoder, crit).cuda()
-    # Evaluation mode
-    segmentation_module.eval()
-
-    return segmentation_module
-
-
 def main(cfg, gpu, visualise, resolution):
     torch.cuda.set_device(gpu)
-    segmentation_module = module_init()
+    segmentation_module = module_init(cfg)
+
     print('Successfully initialised segmentation module')
     # Load color map
     colors = loadmat('data/matlab.mat')['colors']
