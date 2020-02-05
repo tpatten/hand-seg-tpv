@@ -6,6 +6,8 @@ from models import ModelBuilder, SegmentationModule
 from lib.utils import as_numpy
 from config import cfg
 
+__all__ = ['hand_segmentation', 'module_init']
+
 def img_transform(img):
     normalize = transforms.Normalize(
         mean=[0.485, 0.456, 0.406],
