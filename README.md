@@ -1,6 +1,11 @@
 # Hand Segmentation in Third-Person Point of View
 * The code is modified from [CSAILVision GitHub Repository](https://github.com/CSAILVision/semantic-segmentation-pytorch).
 * [EgoHands](http://vision.soic.indiana.edu/projects/egohands/) dataset is utilised to train this neural network.
+* GTX 1080 is used to train the network whereas the inference is running on GTX 1060.
+<img src="./teaser/Screenshot.png" width="900"/>
+
+## Network Architecture
+Pyramid Scene Parsing Network (PSPNet) is implemented to train the model. This paper can be found in [this link](https://arxiv.org/abs/1612.01105).
 
 ## Pretrained Model
 Download the pretrained model from [Google Drive](https://drive.google.com/drive/u/1/folders/1q--u3g9XgQ0qH1I6JJfCs3EfTMc3t1IT) and place the model in ```ckpt/egohands-resnet50dilated-ppm_deepsup```
