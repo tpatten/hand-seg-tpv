@@ -16,7 +16,8 @@ python3 run_inference.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml 
 ```
 2. To change resolution
 ```bash
-python3 run_inference.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml --resolution 720p --visualise
+python3 run_inference.py --cfg config/egohands-resnet50dilated-ppm_deepsup.yaml \
+                         --resolution 720p --visualise
 ```
 ## Offline Testing
 1. Generate an annotation file
