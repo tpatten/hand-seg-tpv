@@ -1,6 +1,7 @@
 # Hand Segmentation in Third-Person Point of View
 * The code is modified from [CSAILVision GitHub Repository](https://github.com/CSAILVision/semantic-segmentation-pytorch).
 * [EgoHands](http://vision.soic.indiana.edu/projects/egohands/) dataset is utilised to train this neural network.
+* ROS node for this module can be found [here](https://github.com/patrosAT/egohands_ros).
 * GTX 1080 is used to train the network whereas the inference is running on GTX 1060.
 <img src="./teaser/Screenshot.png" width="900"/>
 
